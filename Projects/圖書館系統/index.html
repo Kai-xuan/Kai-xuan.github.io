@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>線上圖書館</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-overlay"></div>
+
+  <header>
+    <h1>📚 線上圖書館系統</h1>
+    <div id="user-info" style="display: none;">
+      <span id="user-email"></span>
+      <button id="logout-button">登出</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="auth-section">
+      <div class="auth-container">
+        <div class="auth-toggle">
+          <button id="show-login-toggle" class="toggle-btn active">登入</button>
+          <button id="show-register-toggle" class="toggle-btn">註冊</button>
+        </div>
+        <form id="login-form">
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="login-email" placeholder="電子郵件" required />
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="login-password" placeholder="密碼" required />
+            </div>
+            <button type="submit" class="auth-btn login">登入</button>
+        </form>
+        <form id="register-form" class="hidden">
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="register-name" placeholder="姓名" required />
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="register-email" placeholder="電子郵件" required />
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="register-password" placeholder="密碼" required />
+            </div>
+            <button type="submit" class="auth-btn register">立即註冊</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="admin-section" style="display: none;">
+      <h2>👨‍💼 管理員介面</h2>
+      <div id="admin-controls">
+        <h3>新增書籍</h3>
+        <form id="add-book-form">
+          <input type="text" id="add-book-title" placeholder="輸入書名" required />
+          <button type="submit">新增書籍</button>
+        </form>
+      </div>
+      <h3>書籍庫存總覽</h3>
+      <div id="admin-book-list" class="book-list-container"></div>
+    </section>
+
+    <section id="member-section" style="display: none;">
+      <h2>🙋‍♂️ 歡迎會員！</h2>
+      <h3>我的租借清單</h3>
+      <div id="rental-list-container" class="book-list-container"></div>
+      <hr />
+      <h3>圖書館藏書</h3>
+      <div id="book-list-container" class="book-list-container"></div>
+    </section>
+  </main>
+  
+  <div id="borrow-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h3 id="modal-book-title">租借書籍</h3>
+      <p>請選擇租借時長：</p>
+      <div class="duration-options">
+          <button class="duration-btn" data-days="7">7 天 (每週 NT$50)</button>
+          <button class="duration-btn" data-days="30">30 天 (每月 NT$150)</button>
+          <div class="daily-option">
+            <input type="number" id="custom-days" min="1" max="6" value="1">
+            <span> 天 (每天 NT$10)</span>
+          </div>
+      </div>
+      <p>價格：<span id="modal-price">NT$10</span></p>
+      <p>預計歸還日期：<span id="modal-return-date"></span></p>
+      <button id="confirm-borrow-btn">確認租借</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 線上圖書館</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

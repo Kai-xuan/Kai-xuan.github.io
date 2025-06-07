@@ -1,0 +1,357 @@
+/* --- 🎨 1. CSS 變數與全域設定 --- */
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary-color: #10b981;
+    --accent-color: #f59e0b;
+    --danger-color: #ef4444;
+    --light-gray: #f3f4f6;
+    --medium-gray: #d1d5db;
+    --dark-gray: #374151;
+    --text-color: #11182c;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --border-radius: 12px; /* 圓角加大 */
+    --transition-speed: 0.2s;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    /* ▼▼▼ 新增：移除背景色，讓背景圖可見 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* --- 🌆 2. 全新登入頁面設計 --- */
+  .background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 替換為您喜歡的背景圖 */
+    background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    background-color: #11182c; /* 若圖片載入失敗的後備顏色 */
+    z-index: -1;
+  }
+  
+  /* 登入時，header 和 main 有特殊樣式 */
+  #auth-section:not([style*="display: none"]) ~ header,
+  #auth-section:not([style*="display: none"]) ~ main,
+  #auth-section:not([style*="display: none"]) ~ footer {
+      background-color: transparent;
+      box-shadow: none;
+      border: none;
+  }
+  #auth-section:not([style*="display: none"]) ~ main {
+      justify-content: center;
+      align-items: center;
+  }
+  #auth-section:not([style*="display: none"]) + #admin-section + #member-section + footer {
+      display: none; /* 登入頁時隱藏 footer */
+  }
+  
+  /* 登入卡片容器 */
+  .auth-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px); /* 玻璃擬態核心 */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+  
+  /* 登入/註冊切換 */
+  .auth-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    background: rgba(0,0,0,0.2);
+    border-radius: var(--border-radius);
+    padding: 5px;
+  }
+  .toggle-btn {
+    width: 50%;
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  .toggle-btn.active {
+    background: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.5);
+  }
+  .toggle-btn:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.1);
+      transform: none; /* 覆蓋通用按鈕效果 */
+  }
+  
+  /* 輸入框群組 */
+  .input-group {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  .input-group i {
+    position: absolute;
+    left: 12.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  /* 請找到這個選擇器並用以下內容替換 */
+.input-group input {
+    width: 100%;
+    /* 關鍵就在下一行 padding 的最後一個值 */
+    padding: 1rem 1rem 1rem 3rem; /* 上右下左，左邊內距 3rem，為圖示騰出空間 */
+    background: rgba(0,0,0,0.3);
+    border: 1px solid transparent;
+    border-radius: 18px;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  /* 您可以順便檢查一下 placeholder 的樣式是否存在 */
+  .input-group input::placeholder { 
+    color: rgba(255, 255, 255, 0.5); 
+  }
+  
+  /* 以及 focus-visible 狀態 */
+  .input-group input:focus-visible {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
+    border-color: var(--primary-hover);
+  }
+  
+  /* 登入/註冊按鈕 */
+  .auth-btn {
+    width: 100%;
+    padding: 1rem;
+    font-weight: 700;
+  }
+  .auth-btn.login { background: #007bff; }
+  .auth-btn.login:hover { background: #0069d9; }
+  .auth-btn.register { background: #28a745; }
+  .auth-btn.register:hover { background: #218838; }
+  
+  .hidden { display: none; }
+  
+  
+  /* --- 💎 3. 其他頁面樣式 (微調以適應新設計) --- */
+  header {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    border-bottom: 1px solid var(--medium-gray);
+    position: sticky; top: 0; z-index: 100;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    flex-grow: 1; /* <-- ▼▼▼ 只需要新增這一行 ▼▼▼ */
+  }
+  
+  section {
+    margin-bottom: 2.5rem;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid var(--medium-gray);
+    margin: 2rem 0;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
+  }
+  
+  
+  /* --- ✨ 3. 表單與按鈕 --- */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"] {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: box-shadow var(--transition-speed), border-color var(--transition-speed);
+  }
+  /* 專業的 :focus-visible 狀態，僅在鍵盤操作時顯示外框 */
+  input:focus-visible {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+  }
+  
+  button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    background-color: var(--primary-color);
+    color: white;
+  }
+  button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+  }
+  button:active {
+    transform: translateY(0);
+  }
+  
+  /* 按鈕分類 */
+  #logout-button, .delete-btn { background-color: var(--danger-color); }
+  #logout-button:hover, .delete-btn:hover { background-color: #dc2626; }
+  
+  .return-btn { background-color: var(--secondary-color); }
+  .return-btn:hover { background-color: #059669; }
+  
+  .edit-btn { background-color: var(--accent-color); color: var(--text-color); }
+  .edit-btn:hover { background-color: #d97706; }
+  
+  
+  /* --- 🃏 4. 書籍卡片式設計 --- */
+  .book-list-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  
+  .book-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: var(--shadow);
+  }
+  .book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  
+  .book-item h4 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .book-item p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+  }
+  
+  .book-item .actions {
+    margin-top: auto; /* 將按鈕推至底部 */
+  }
+  .book-item .actions button {
+    width: 100%;
+  }
+  
+  /* --- 🪄 5. 彈出視窗 (Modal) 優化 --- */
+  .modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 24, 39, 0.6); /* 使用更深的半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 動畫效果 */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-speed) ease-in-out;
+  }
+  /* 當 Modal 顯示時 */
+  .modal[style*="display: flex"] {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .modal-content {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    /* 動畫效果 */
+    transform: scale(0.95);
+    transition: transform var(--transition-speed) ease-in-out;
+  }
+  .modal[style*="display: flex"] .modal-content {
+    transform: scale(1);
+  }
+  
+  .close-button {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  .duration-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 1rem 0;
+  }
+  .daily-option {
+      grid-column: 1 / -1; /* 佔滿整行 */
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+  
+  /* --- 📱 6. 響應式設計 (RWD) --- */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    main {
+      padding: 1rem;
+    }
+    section {
+      padding: 1.5rem;
+    }
+  }
