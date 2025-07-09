@@ -41,8 +41,8 @@
 
 我是一名剛畢業的資訊管理系學生，熱愛程式開發，特別對 AI 與前端技術充滿熱情。目前積極準備成為一名 AI 工程師，也持續透過實作專案累積經驗。如果你對我的作品有興趣，歡迎聯絡我！
 
-📫 Email: [your-email@example.com]  
-📄 Resume: [（可加上你的 PDF 履歷連結或 LinkedIn）]
+📫 Email: lkx6387@gmail.com 
+📄 Resume: https://drive.google.com/file/d/1wvDOJtPCLVqvpv1jg8SC1U6B8VvXGrA3/view?usp=sharing
 
 ---
 
