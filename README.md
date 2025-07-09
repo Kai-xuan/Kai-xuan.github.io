@@ -10,7 +10,7 @@
 
 ## 📂 專案總覽
 
-### 📌 [個人網站](https://kai-xuan.github.io/projects/個人網站/)  
+### 📌 [個人網站](https://kai-xuan.github.io/Projects/個人網站/)  
 一個以自我介紹為主的個人網站，結合了簡歷內容與網頁設計，取代傳統 PDF 或紙本履歷，讓訪客可以更有互動性地認識我。
 
 - 使用 HTML、CSS、JavaScript 開發
