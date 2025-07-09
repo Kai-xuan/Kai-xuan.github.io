@@ -10,7 +10,7 @@
 
 ## 📂 專案總覽
 
-### 📌 [個人網站](https://kai-xuan.github.io/projects/personal-website/)  
+### 📌 [個人網站](https://kai-xuan.github.io/projects/個人網站/)  
 一個以自我介紹為主的個人網站，結合了簡歷內容與網頁設計，取代傳統 PDF 或紙本履歷，讓訪客可以更有互動性地認識我。
 
 - 使用 HTML、CSS、JavaScript 開發
@@ -19,7 +19,7 @@
 
 ---
 
-### 💱 [匯率轉換器](https://kai-xuan.github.io/projects/currency-converter/)  
+### 💱 [匯率轉換器](https://kai-xuan.github.io/projects/匯率轉換器/)  
 大學課堂上的一個小專案，實作基本的匯率轉換功能。
 
 - 使用 JavaScript 進行數值轉換
@@ -28,7 +28,7 @@
 
 ---
 
-### 📚 [圖書館系統](https://kai-xuan.github.io/projects/library-system/)  
+### 📚 [圖書館系統](https://kai-xuan.github.io/projects/圖書館系統/)  
 模擬圖書館管理功能的網頁系統，設計目的是理解資訊系統流程與前端資料操作。
 
 - 包含書籍查詢、新增、刪除等功能
