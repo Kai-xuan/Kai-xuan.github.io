@@ -1,99 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-  <title>汇率转换计算器</title>
-  <link rel="stylesheet" type="text/css" href="mystyle.css">
+  <meta charset="UTF-8">
+  <title>匯率轉換器</title>
+  <link rel="stylesheet" href="mystyle.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>💱 匯率轉換計算器</h1>
+    <p class="subtitle">請輸入新台幣 (TWD) 金額，我們將為您換算成其他貨幣</p>
+
+    <div class="input-section">
+      <input type="text" id="taiwanAmount" placeholder="例如：1000" />
+      <div class="buttons">
+        <button id="calculate">計算</button>
+        <button id="reset">清除</button>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <h2>💰 轉換結果</h2>
+      <ul>
+        <li><span>美元 (USD)：</span><strong id="usdAmount"></strong></li>
+        <li><span>歐元 (EUR)：</span><strong id="euroAmount"></strong></li>
+        <li><span>日圓 (JPY)：</span><strong id="jpyAmount"></strong></li>
+        <li><span>韓圓 (KRW)：</span><strong id="krwAmount"></strong></li>
+        <li><span>澳幣 (AUD)：</span><strong id="audAmount"></strong></li>
+      </ul>
+    </div>
+
+    <footer>資料僅供參考，匯率為模擬數據。</footer>
+  </div>
+
   <script>
-    // JavaScript 代码
-    $(document).ready(function() {
-      // XML 数据
-      var xmlData = `
-        <rates>
-          <rate>
-            <currency>USD</currency>
-            <value>30.30</value>
-          </rate>
-          <rate>
-            <currency>EUR</currency>
-            <value>33.33</value>
-          </rate>
-          <rate>
-            <currency>JPY</currency>
-            <value>0.22</value>
-          </rate>
-          <rate>
-            <currency>KRW</currency>
-            <value>0.023</value>
-          </rate>
-          <rate>
-            <currency>AUD</currency>
-            <value>20</value>
-          </rate>
-        </rates>
-      `;
-  
-      // 解析 XML 数据并存储到一个对象中
-      var parser = new DOMParser();
-      var xmlDoc = parser.parseFromString(xmlData, "text/xml");
-      var rates = {};
-      $(xmlDoc).find('rate').each(function() {
-        var currency = $(this).find('currency').text();
-        var rate = parseFloat($(this).find('value').text());
-        rates[currency] = rate;
-      });
-  
-      // 处理计算功能
-      $('#calculate').click(function() {
-        var taiwanAmount = parseFloat($('#taiwanAmount').val());
-  
-        // 检查输入是否有效
-        if (isNaN(taiwanAmount)) {
-          alert('请输入有效的金额！');
-          $('#taiwanAmount').val('');
+    $(document).ready(function () {
+      const rates = {
+        USD: 30.3,
+        EUR: 33.33,
+        JPY: 0.22,
+        KRW: 0.023,
+        AUD: 20
+      };
+
+      $('#calculate').click(function () {
+        const twd = parseFloat($('#taiwanAmount').val());
+        if (isNaN(twd)) {
+          alert('請輸入有效的台幣金額');
           return;
         }
-  
-        // 计算转换金额
-        var usdAmount = (taiwanAmount / rates['USD']).toFixed(2);
-        var euroAmount = (taiwanAmount / rates['EUR']).toFixed(2);
-        var jpyAmount = (taiwanAmount / rates['JPY']).toFixed(2);
-        var krwAmount = (taiwanAmount / rates['KRW']).toFixed(2);
-        var audAmount = (taiwanAmount / rates['AUD']).toFixed(2);
-  
-        // 显示结果
-        $('#usdAmount').text(usdAmount + ' USD');
-        $('#euroAmount').text(euroAmount + ' EUR');
-        $('#jpyAmount').text(jpyAmount + ' JPY');
-        $('#krwAmount').text(krwAmount + ' KRW');
-        $('#audAmount').text(audAmount + ' AUD');
+        $('#usdAmount').text((twd / rates.USD).toFixed(2) + ' USD');
+        $('#euroAmount').text((twd / rates.EUR).toFixed(2) + ' EUR');
+        $('#jpyAmount').text((twd / rates.JPY).toFixed(0) + ' JPY');
+        $('#krwAmount').text((twd / rates.KRW).toFixed(0) + ' KRW');
+        $('#audAmount').text((twd / rates.AUD).toFixed(2) + ' AUD');
       });
-  
-      // 重新开始功能
-      $('#reset').click(function() {
+
+      $('#reset').click(function () {
         $('#taiwanAmount').val('');
-        $('#usdAmount').text('');
-        $('#euroAmount').text('');
-        $('#jpyAmount').text('');
-        $('#krwAmount').text('');
-        $('#audAmount').text('');
+        $('#usdAmount, #euroAmount, #jpyAmount, #krwAmount, #audAmount').text('');
       });
     });
   </script>
-</head>
-<body>
-  <h1>汇率转换计算器</h1>
-  <p>请输入台币金额，并点击计算按钮进行转换：</p>
-  <input type="text" id="taiwanAmount" placeholder="请输入台币金额">
-  <button id="calculate">计算</button>
-  <button id="reset">重新开始</button>
-  <h2>转换结果：</h2>
-  <ul>
-    <li id="usdAmount"></li>
-    <li id="euroAmount"></li>
-    <li id="jpyAmount"></li>
-    <li id="krwAmount"></li>
-    <li id="audAmount"></li>
-  </ul>
 </body>
 </html>
