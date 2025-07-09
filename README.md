@@ -19,7 +19,7 @@
 
 ---
 
-### 💱 [匯率轉換器](https://kai-xuan.github.io/projects/匯率轉換器/)  
+### 💱 [匯率轉換器](https://kai-xuan.github.io/Projects/匯率轉換器/)  
 大學課堂上的一個小專案，實作基本的匯率轉換功能。
 
 - 使用 JavaScript 進行數值轉換
@@ -28,7 +28,7 @@
 
 ---
 
-### 📚 [圖書館系統](https://kai-xuan.github.io/projects/圖書館系統/)  
+### 📚 [圖書館系統](https://kai-xuan.github.io/Projects/圖書館系統/)  
 模擬圖書館管理功能的網頁系統，設計目的是理解資訊系統流程與前端資料操作。
 
 - 包含書籍查詢、新增、刪除等功能
